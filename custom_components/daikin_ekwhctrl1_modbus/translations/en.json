@@ -1,0 +1,290 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add Modbus gateway",
+        "description": "Enter the Modbus TCP gateway (RS485 to Ethernet converter) the EKWHCTRL1 / EKRTCTRL1 wall controls are wired to. Wall controls are added afterwards.",
+        "data": {
+          "name": "Name",
+          "host": "Host",
+          "port": "Port",
+          "framing": "Protocol",
+          "scan_interval": "Poll interval (seconds)"
+        },
+        "data_description": {
+          "framing": "Use \"Modbus RTU over TCP\" for transparent serial servers (Waveshare, USR, Elfin in transparent mode) and \"Modbus TCP\" for gateways that convert the protocol. The serial side must be 9600 baud, 8 data bits, no parity, 1 stop bit.",
+          "scan_interval": "Each poll reads about a dozen registers per wall control, one request each, so very short intervals with many units can overload the bus."
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Modbus gateway",
+        "data": {
+          "name": "Name",
+          "host": "Host",
+          "port": "Port",
+          "framing": "Protocol",
+          "scan_interval": "Poll interval (seconds)"
+        },
+        "data_description": {
+          "framing": "Use \"Modbus RTU over TCP\" for transparent serial servers (Waveshare, USR, Elfin in transparent mode) and \"Modbus TCP\" for gateways that convert the protocol. The serial side must be 9600 baud, 8 data bits, no parity, 1 stop bit.",
+          "scan_interval": "Each poll reads about a dozen registers per wall control, one request each, so very short intervals with many units can overload the bus."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the gateway. Check host, port and that the gateway is powered."
+    },
+    "abort": {
+      "already_configured": "A gateway with this host and port is already configured.",
+      "reconfigure_successful": "The gateway was updated."
+    }
+  },
+  "config_subentries": {
+    "wall_control": {
+      "initiate_flow": {
+        "user": "Add wall control",
+        "reconfigure": "Reconfigure wall control"
+      },
+      "entry_type": "Wall control",
+      "step": {
+        "user": {
+          "title": "Add wall control",
+          "description": "The slave address is the value of register 200 (1-255), set on the wall control keypad: with the panel in stand-by hold AUTO for 5 s. The manual recommends leaving address 1 free.",
+          "data": {
+            "name": "Name",
+            "slave_id": "Modbus slave address"
+          }
+        },
+        "reconfigure": {
+          "title": "Reconfigure wall control",
+          "description": "The slave address is the value of register 200 (1-255), set on the wall control keypad: with the panel in stand-by hold AUTO for 5 s. The manual recommends leaving address 1 free.",
+          "data": {
+            "name": "Name",
+            "slave_id": "Modbus slave address"
+          }
+        }
+      },
+      "error": {
+        "slave_in_use": "Another wall control on this gateway already uses this address.",
+        "no_response": "The unit did not answer at this address. Check the address and wiring, or submit again to add it anyway."
+      },
+      "abort": {
+        "reconfigure_successful": "The wall control was updated."
+      }
+    }
+  },
+  "selector": {
+    "framing": {
+      "options": {
+        "rtu_over_tcp": "Modbus RTU over TCP (transparent serial server)",
+        "modbus_tcp": "Modbus TCP"
+      }
+    }
+  },
+  "entity": {
+    "climate": {
+      "wall_control": {
+        "state_attributes": {
+          "fan_mode": {
+            "name": "Fan programme",
+            "state": {
+              "automatic": "Automatic",
+              "silent": "Silent",
+              "night": "Night",
+              "maximum": "Maximum"
+            }
+          }
+        }
+      }
+    },
+    "sensor": {
+      "air_temperature": {
+        "name": "Air temperature"
+      },
+      "water_temperature": {
+        "name": "Water temperature (H2)"
+      },
+      "active_setpoint": {
+        "name": "Active setpoint"
+      },
+      "motor_speed": {
+        "name": "Fan speed (set)"
+      },
+      "active_mode": {
+        "name": "Active mode",
+        "state": {
+          "cooling": "Cooling",
+          "heating": "Heating"
+        }
+      }
+    },
+    "binary_sensor": {
+      "filter": {
+        "name": "Filter maintenance"
+      },
+      "motor_fault": {
+        "name": "Motor fault"
+      },
+      "air_probe": {
+        "name": "Air probe fault"
+      },
+      "grid_open": {
+        "name": "Grid contact open"
+      },
+      "h2_probe": {
+        "name": "H2 probe fault"
+      },
+      "h4_probe": {
+        "name": "H4 probe fault"
+      },
+      "harmful_water": {
+        "name": "Harmful water block"
+      },
+      "h2_water_unsuitable": {
+        "name": "H2 water not suitable"
+      },
+      "h4_water_unsuitable": {
+        "name": "H4 water not suitable"
+      },
+      "high_temperature_resistance": {
+        "name": "High temperature resistance"
+      },
+      "communication_error": {
+        "name": "Communication error (blind version)"
+      },
+      "air_probe_m4": {
+        "name": "Remote air probe error (M4 panel)"
+      },
+      "antifreeze": {
+        "name": "Antifreeze mode"
+      },
+      "test_mode": {
+        "name": "Test mode"
+      },
+      "fan_stop_h2": {
+        "name": "Fan stopped (H2 water unsuitable)"
+      },
+      "fan_stop_h4": {
+        "name": "Fan stopped (H4 water unsuitable)"
+      },
+      "water_stop": {
+        "name": "Stopped for unsuitable water"
+      },
+      "master_timeout": {
+        "name": "Master timeout"
+      },
+      "h2_probe_absent": {
+        "name": "H2 probe absent at start-up"
+      },
+      "h4_probe_absent": {
+        "name": "H4 probe absent at start-up"
+      },
+      "valve_1": {
+        "name": "Water valve 1"
+      },
+      "valve_2": {
+        "name": "Water valve 2"
+      },
+      "chiller_request": {
+        "name": "Chiller request"
+      },
+      "boiler_request": {
+        "name": "Boiler request"
+      },
+      "alarm": {
+        "name": "Alarm"
+      }
+    },
+    "number": {
+      "min_setpoint": {
+        "name": "Minimum setpoint (SPL)"
+      },
+      "max_setpoint": {
+        "name": "Maximum setpoint (SPH)"
+      },
+      "presence_offset": {
+        "name": "Presence / stand-by offset"
+      },
+      "maintenance_interval": {
+        "name": "Maintenance interval"
+      },
+      "fan_hours": {
+        "name": "Fan running hours"
+      },
+      "air_probe_offset": {
+        "name": "Air probe offset (T1)"
+      },
+      "web_min_setpoint": {
+        "name": "Restricted minimum setpoint (SPL_W)"
+      },
+      "web_max_setpoint": {
+        "name": "Restricted maximum setpoint (SPH_W)"
+      },
+      "speed_silent_min": {
+        "name": "Minimum speed in silent and night"
+      },
+      "speed_night_max": {
+        "name": "Maximum speed in night / minimum in auto"
+      },
+      "speed_silent_max": {
+        "name": "Maximum speed in silent / minimum in maximum"
+      },
+      "speed_silent_max_performance": {
+        "name": "Maximum speed in silent / minimum in maximum (performance)"
+      },
+      "speed_auto_max": {
+        "name": "Maximum speed in auto"
+      },
+      "speed_auto_max_performance": {
+        "name": "Maximum speed in auto (performance)"
+      },
+      "speed_maximum": {
+        "name": "Maximum speed in maximum"
+      },
+      "speed_maximum_performance": {
+        "name": "Maximum speed in maximum (performance)"
+      },
+      "water_min_heating": {
+        "name": "Minimum water temperature for heating"
+      },
+      "water_max_cooling": {
+        "name": "Maximum water temperature for cooling"
+      },
+      "water_probe_h2_offset": {
+        "name": "Water probe H2 offset"
+      },
+      "water_probe_h4_offset": {
+        "name": "Water probe H4 offset"
+      }
+    },
+    "switch": {
+      "keyboard_lock": {
+        "name": "Keyboard lock"
+      },
+      "web_led_off": {
+        "name": "Web LED off"
+      },
+      "web_forced_off": {
+        "name": "Forced off"
+      },
+      "web_lock_program": {
+        "name": "Lock programme selection"
+      },
+      "web_lock_standby": {
+        "name": "Lock stand-by key"
+      },
+      "web_inhibit_extremes": {
+        "name": "Inhibit setpoint extremes"
+      },
+      "web_setpoint_restriction": {
+        "name": "Restrict setpoint range"
+      },
+      "web_lock_keys": {
+        "name": "Lock all keys"
+      },
+      "web_lock_season": {
+        "name": "Lock season key"
+      }
+    }
+  }
+}

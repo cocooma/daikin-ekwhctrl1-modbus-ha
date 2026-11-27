@@ -1,0 +1,12 @@
+{
+  "domain": "daikin_ekwhctrl1_modbus",
+  "name": "Daikin EKWHCTRL1 Modbus Home Assistant Integration",
+  "codeowners": ["@cocooma"],
+  "config_flow": true,
+  "documentation": "https://github.com/cocooma/daikin-ekwhctrl1-modbus-ha",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/cocooma/daikin-ekwhctrl1-modbus-ha/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
