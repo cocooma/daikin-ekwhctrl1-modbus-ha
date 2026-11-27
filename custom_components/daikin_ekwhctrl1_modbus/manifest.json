@@ -1,6 +1,7 @@
 {
   "domain": "daikin_ekwhctrl1_modbus",
   "name": "Daikin EKWHCTRL1 Modbus Home Assistant Integration",
+  "categories": ["climate.thermostats_heating"],
   "codeowners": ["@cocooma"],
   "config_flow": true,
   "documentation": "https://github.com/cocooma/daikin-ekwhctrl1-modbus-ha",
